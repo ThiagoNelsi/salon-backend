@@ -1,7 +1,17 @@
 const routes = require('express').Router();
 
-routes.get('/', (req, res) => {
-    res.json({ message: 'Hello, World' });
-});
+const validators = {
+  salon: require('./validators/salon'),
+}
+
+const controllers = {
+  salon: require('./controllers/salon'),
+}
+
+// Salon
+routes.get('/salon', controllers.salon.list);
+routes.post('/salon', validators.salon.create(), controllers.salon.create);
+
+// Client
 
 module.exports = routes;
