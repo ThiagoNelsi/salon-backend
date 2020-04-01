@@ -4,7 +4,7 @@ const app = require('../../src/app');
 const Salon = require('../../src/models/salon');
 
 describe('salon', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await Salon.deleteMany({});
   });
   afterAll(async () => {
@@ -15,6 +15,7 @@ describe('salon', () => {
     const response = await request(app)
       .post('/salon')
       .send({
+        password: '123abc',
         name: "Amazing Haircut",
         owner: "Thiago",
         description: "Here you'll got the best haircut of your life :D",

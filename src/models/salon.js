@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const LocationSchema = require('./utils/LocationSchema');
 
 const SalonSchema = new mongoose.Schema({
+  password: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

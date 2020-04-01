@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const Salon = require('../models/salon');
 
 module.exports = {
@@ -24,13 +25,15 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { name, description, owner, contact, images } = req.body;
+    const { password, name, description, owner, contact, images } = req.body;
     const location = {
       type: 'Point',
       coordinates: req.body.location,
     }
+    const hash = await bcrypt.hash(password, 10);
     try {
       await Salon.create({
+        password: hash,
         name,
         description,
         owner,
