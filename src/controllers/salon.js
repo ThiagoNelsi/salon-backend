@@ -1,13 +1,24 @@
-const crypto = require('crypto');
 const Salon = require('../models/salon');
 
 module.exports = {
 
   async list(req, res) {
+    const { latitude, longitude, max_distance = 10 } = req.query;
     try {
-      const salons = await Salon.find();
+      const salons = await Salon.find({
+        location: {
+          $near: {
+            $geometry: {
+              type: 'Point',
+              coordinates: [longitude, latitude],
+            },
+            $maxDistance: max_distance * 1000,
+          }
+        }
+      });
       return res.json(salons);
     } catch (err) {
+      console.log(err);
       return res.status(400).json({ error: 'Cannot list' });
     }
   },

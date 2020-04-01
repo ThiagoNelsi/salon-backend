@@ -9,7 +9,7 @@ const controllers = {
 }
 
 // Salon
-routes.get('/salon', controllers.salon.list);
+routes.get('/salon', validators.salon.list(), controllers.salon.list);
 routes.post('/salon', validators.salon.create(), controllers.salon.create);
 
 // Client

@@ -1,6 +1,15 @@
 const { celebrate, Segments, Joi } = require('celebrate');
 
 module.exports = {
+  list() {
+    return celebrate({
+      [Segments.QUERY]: Joi.object().keys({
+        longitude: Joi.number().required(),
+        latitude: Joi.number().required(),
+        max_distance: Joi.number().optional()
+      })
+    });
+  },
   create() {
     return celebrate({
       [Segments.BODY]: Joi.object().keys({
@@ -15,5 +24,5 @@ module.exports = {
         images: Joi.array(),
       })
     });
-  }
+  },
 }

@@ -9,7 +9,9 @@ const app = express();
 
 app.use(cors());
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-l5xbv.mongodb.net/test?retryWrites=true&w=majority`, {
+const env = process.env.NODE_ENV === 'test' ? 'test' : 'development';
+
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-l5xbv.mongodb.net/${env}?retryWrites=true&w=majority`, {
   useFindAndModify: false,
   useCreateIndex: true,
   useNewUrlParser: true,
