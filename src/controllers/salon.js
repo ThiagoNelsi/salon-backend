@@ -41,6 +41,7 @@ module.exports = {
       return res.status(204).send();
     } catch (err) {
       console.log(err);
+      if (/duplicate key error/.test(err.errmsg)) return res.status(400).json({ error: 'Phone number already registered' });
       return res.status(400).json({ error: 'Cannot create salon' });
     }
   }

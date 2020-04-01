@@ -15,15 +15,12 @@ describe('salon', () => {
     const response = await request(app)
       .post('/salon')
       .send({
-        location: ["-22.2822849", "-46.3528733"],
         name: "Amazing Haircut",
-        description: "Here you'll got the best haircut of your life :D",
         owner: "Thiago",
-        contact: {
-          whatsapp: "35998651027",
-          telephone: "3534415423"
-        },
-        images: []
+        description: "Here you'll got the best haircut of your life :D",
+        contact: "35998651027",
+        images: [],
+        location: ["-22.2822849", "-46.3528733"],
       })
       .expect(204);
   });

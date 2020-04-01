@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const LocationSchema = require('./utils/LocationSchema');
-const ContactSchema = require('./utils/ContactSchema');
 
 const SalonSchema = new mongoose.Schema({
   name: {
@@ -16,8 +15,9 @@ const SalonSchema = new mongoose.Schema({
     required: true,
   },
   contact: {
-    type: ContactSchema,
-    required: false,
+    type: String,
+    required: true,
+    unique: true,
   },
   images: {
     type: [String],

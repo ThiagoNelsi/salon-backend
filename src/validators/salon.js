@@ -17,10 +17,7 @@ module.exports = {
         name: Joi.string().required(),
         description: Joi.string().required(),
         owner: Joi.string().required(),
-        contact: Joi.object().keys({
-          whatsapp: Joi.string().allow(""),
-          telephone: Joi.string().allow(""),
-        }),
+        contact: Joi.string().min(10).max(11).required(),
         images: Joi.array(),
       })
     });
