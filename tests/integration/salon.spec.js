@@ -15,7 +15,7 @@ describe('salon', () => {
     const response = await request(app)
       .post('/salon')
       .send({
-        password: '123abc',
+        password: "123abc",
         name: "Amazing Haircut",
         owner: "Thiago",
         description: "Here you'll got the best haircut of your life :D",
@@ -31,5 +31,19 @@ describe('salon', () => {
       .get('/salon?longitude=-22.3178624&latitude=-46.3273575&max_distance=5')
       .expect('Content-Type', /json/)
       .expect(200);
+  });
+
+  it('shoul return the credetials (JWT and refresh_token)', async () => {
+    const response = await request(app)
+      .post('/salon/auth')
+      .send({
+        number: "35998651027",
+        password: "123abc",
+      });
+
+    expect(response.body).toHaveProperty('access_token');
+    expect(response.body).toHaveProperty('refresh_token');
+    expect(response.body).toHaveProperty('expires_in');
+
   });
 });

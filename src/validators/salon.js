@@ -1,15 +1,17 @@
 const { celebrate, Segments, Joi } = require('celebrate');
 
 module.exports = {
+
   list() {
     return celebrate({
       [Segments.QUERY]: Joi.object().keys({
         longitude: Joi.number().required(),
         latitude: Joi.number().required(),
-        max_distance: Joi.number().optional()
+        max_distance: Joi.number().optional(),
       })
     });
   },
+
   create() {
     return celebrate({
       [Segments.BODY]: Joi.object().keys({
@@ -23,4 +25,14 @@ module.exports = {
       })
     });
   },
+
+  auth() {
+    return celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        number: Joi.string().min(10).max(11).required(),
+        password: Joi.string().required(),
+      })
+    })
+  }
+
 }
